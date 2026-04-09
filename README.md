@@ -14,13 +14,13 @@ Equipment Required:
 	Computer with Python installed: To run the automated test script.
 	PyVISA and OpenPyXL libraries: For instrument control and Excel file handling.
 
+<img width="726" height="531" alt="image" src="https://github.com/user-attachments/assets/f81dd860-fb8a-41a9-b75f-aa819c57b849" />
+
 Circuit Design:
 	Full-Wave Rectifier Circuit:
 	Use 4 x 1N4001 diodes in a bridge rectifier configuration.
 	Connect the output of the rectifier to a capacitor filter (start with 100 µF).
 	Add a load resistor (e.g., 1 kΩ) across the capacitor.
-
-	<img width="726" height="531" alt="image" src="https://github.com/user-attachments/assets/f81dd860-fb8a-41a9-b75f-aa819c57b849" />
 
 	Test Setup:
 	Connect the function generator to the input of the rectifier circuit.
