@@ -90,14 +90,19 @@ for frequency in freqs:
     oscope.write("PACU RMS,C1")
     sleep(2)
 
-    # Take measurements.
+    # Take the oscilloscope and dmm measurements and display them.
     Vrms = round(float(oscope.query(f"C1:PAVA? RMS").split(",")[1].strip("V\n")),6)
     Vdc = round(float(dmm.query("MEAS:VOLT:DC?")),6)
     print(f"Oscilloscope: {Vrms}\tDMM: {Vdc}")
+
+    # Turns out to be unnecessary math as it's just adding and subtracting Vdc**2
     Ripple = round(sqrt(((Vrms*Vrms) + (Vdc*Vdc)) - (Vdc*Vdc)),6)
+    
+    # The ripple factor is the Vrms/Vdc
     Factor = round(Ripple/Vdc,6)
     print(f"VRipple: {Ripple}\tRipple Factor: {Factor}")
-    Factors = pd.DataFrame(columns=["Frequency","Oscilloscope","DMM","VRipple","RFactor"])
+    
+    # Now add the data to the workbook.
     worksheet[f"A{counter+2}"] = frequency
     worksheet[f"B{counter+2}"] = Vrms
     worksheet[f"C{counter+2}"] = Vdc
@@ -105,6 +110,7 @@ for frequency in freqs:
     worksheet[f"E{counter+2}"] = Factor
     workbook.save(filepath)
 
+    # Increment the counter and put a 2 second wait between measurements.
     counter += 1
     sleep(2)
 
